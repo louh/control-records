@@ -21,20 +21,14 @@
         </div>
       </footer>
     </div>
-    <img
-      v-if="stamp"
-      src="../assets/stamp.png"
-      class="stamp"
-      :style="style"
-      alt="Record copy stamp"
-      draggable="false"
-    />
+    <Stamp v-if="stamp" />
   </div>
 </template>
 
 <script>
 import HeaderBox from './HeaderBox'
 import PageBodyContent from './PageBodyContent'
+import Stamp from './Stamp'
 
 export default {
   props: {
@@ -54,26 +48,8 @@ export default {
   },
   components: {
     HeaderBox,
-    PageBodyContent
-  },
-  computed: {
-    style: function () {
-      // Recomputes every time this is toggled
-      if (this.stamp) {
-        const left = Math.random() * (72 - 3) + 3
-        const inUpper = Math.random() < 0.5
-        const top = inUpper
-          ? Math.random() * (22 - 8) + 8
-          : Math.random() * (84 - 72) + 72
-        const rotate = Math.random() * 90 - 50
-        return `
-          left: ${left}%;
-          top: ${top}%;
-          transform: rotate(${rotate}deg);
-        `
-      }
-      return ''
-    }
+    PageBodyContent,
+    Stamp,
   },
 }
 </script>
@@ -150,6 +126,8 @@ export default {
     right: var(--side-margin);
     width: calc(9.75 / 6 * 72 / 612 * 100%);
     height: auto;
+    user-select: none;
+    pointer-events: none;
   }
 
   footer {
@@ -159,14 +137,5 @@ export default {
     margin-top: 5%;
     font-family: 'OCR F OT', monospace;
     font-size: var(--ocr-font-size);
-  }
-
-  .stamp {
-    position: absolute;
-    width: 22%;
-    opacity: 0.75;
-    left: 25%;
-    top: 9%;
-    transform: rotate(-11deg);
   }
 </style>
