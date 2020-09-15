@@ -7,8 +7,9 @@
       <button @click="handlePrint">Print</button>
       <!-- button @click="handleExportPDF">Export PDF (beta)</button -->
       <button @click="handleToggleSeal">Toggle seal: {{ seal }}</button>
+      <button @click="handleToggleStamp">Toggle copy stamp: {{ stamp ? 'On' : 'Off' }}</button>
     </div>
-    <Page :recno="recno" :seal="seal" :content="content"></Page>
+    <Page :recno="recno" :seal="seal" :stamp="stamp" :content="content"></Page>
     <footer>
       A fan project inspired by
       <a href="https://www.remedygames.com/games/control/" target="_blank" rel="noreferer noopener">Control</a>, a game by Remedy Entertainment.
@@ -47,6 +48,7 @@ export default {
     return {
       recno: Math.floor(Math.random() * 1000000000),
       seal: 'Color',
+      stamp: false,
       content: '',
       isEditorActive: false
     }
@@ -59,6 +61,7 @@ export default {
     handleReset: function () {
       if (window.confirm('Are you sure you want to reset this document?')) {
         this.recno = Math.floor(Math.random() * 1000000000)
+        this.stamp = false
         this.seal = 'Color'
         window.fetch('/docs/ai83-ke.md')
           .then((response) => response.text())
@@ -99,7 +102,10 @@ export default {
           this.seal = 'Color'
           break
       }
-    }
+    },
+    handleToggleStamp: function () {
+      this.stamp = !this.stamp
+    },
   },
   mounted() {
     window.fetch('/docs/ai63-ke.md')
