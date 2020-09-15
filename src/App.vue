@@ -13,7 +13,7 @@
       A fan project inspired by
       <a href="https://www.remedygames.com/games/control/" target="_blank" rel="noreferer noopener">Control</a>, a game by Remedy Entertainment.
       Built by <a href="https://louhuang.com/" target="_blank" rel="noreferer noopener">Lou Huang</a>.
-      <a href="https://github.com/louh/fbc-docs/" target="_blank" rel="noreferer noopener">Source code</a>
+      <a href="https://github.com/louh/control-records/" target="_blank" rel="noreferer noopener">Source code</a>
     </footer>
     <Editor
       :key="content"
