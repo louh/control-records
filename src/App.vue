@@ -38,6 +38,13 @@ function calculateHTMLScale (el) {
   return LETTER_WIDTH_72DPI / srcwidth / window.devicePixelRatio / 1.45
 }
 
+const files = [
+  'ai11-ue.md',
+  'ai63-ke.md',
+  'awe-48-summary.md',
+  'awe-48-supplement.md',
+]
+
 export default {
   name: 'App',
   components: {
@@ -48,7 +55,7 @@ export default {
     return {
       recno: Math.floor(Math.random() * 1000000000),
       seal: 'Color',
-      stamp: false,
+      stamp: Math.random() < 0.5,
       content: '',
       isEditorActive: false
     }
@@ -108,7 +115,8 @@ export default {
     },
   },
   mounted() {
-    window.fetch('/docs/ai63-ke.md')
+    const fileIndex = Math.floor(Math.random() * files.length)
+    window.fetch(`/docs/${files[fileIndex]}`)
       .then((response) => response.text())
       .then((content) => {
         this.content = content
