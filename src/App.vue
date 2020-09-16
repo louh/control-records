@@ -2,6 +2,8 @@
   <main class="container">
     <h1>Federal Bureau of Control / Records <sup class="beta">beta</sup></h1>
     <div class="controls">
+      <button @click="handleLoad">Load</button>
+      <LoadMenu v-if="isLoadMenuOpen" :items="docs" @change="loadSelected" />
       <button @click="handleEdit">Edit</button>
       <button @click="handleReset">Reset</button>
       <button @click="handlePrint">Print</button>
@@ -30,6 +32,7 @@
 import { jsPDF } from 'jspdf'
 import Page from './components/Page'
 import Editor from './components/Editor'
+import LoadMenu from './components/LoadMenu'
 import docs from './docs.json'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
@@ -43,18 +46,24 @@ export default {
   name: 'App',
   components: {
     Page,
-    Editor
+    Editor,
+    LoadMenu,
   },
   data() {
     return {
+      docs: docs,
       recno: Math.floor(Math.random() * 1000000000),
       seal: 'Color',
       stamp: Math.random() < 0.5,
       content: '',
-      isEditorActive: false
+      isEditorActive: false,
+      isLoadMenuOpen: false,
     }
   },
   methods: {
+    handleLoad: function () {
+      this.isLoadMenuOpen = !this.isLoadMenuOpen
+    },
     handleEdit: function () {
       // TODO: opens an editor which reads from this.content, and sets this value
       this.isEditorActive = true
@@ -107,6 +116,14 @@ export default {
     handleToggleStamp: function () {
       this.stamp = !this.stamp
     },
+    loadSelected: function (opt) {
+      this.isLoadMenuOpen = false
+      window.fetch(`/docs/${opt.filename}`)
+        .then((response) => response.text())
+        .then((content) => {
+          this.content = content
+        })
+    }
   },
   mounted() {
     const fileIndex = Math.floor(Math.random() * docs.length)

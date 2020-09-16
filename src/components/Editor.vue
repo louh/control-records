@@ -62,6 +62,7 @@ export default {
   align-items: center;
   overflow: hidden;
   display: none;
+  z-index: 2;
 }
 
 .editor.visible {
