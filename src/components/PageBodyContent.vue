@@ -24,12 +24,20 @@ export default {
       // DOMPurify prevents people from typing in custom HTML etc
       // Also prevent some Markdown things that don't belong on the record,
       // like links and images (maybe we support images later some other way)
-      return DOMPurify.sanitize(marked(this.content), {
+      const html = DOMPurify.sanitize(marked(this.content), {
         ALLOWED_TAGS: [
           'b', 'i', 'em', 'strong', 'h1', 'h2', 'h3', 'h4', 'h5',
           'h6', 'br', 'p', 'del', 'ul', 'li', 'blockquote'
         ]
       })
+
+      // Some logs can have a redacted thing followed by a possessive
+      // apostrophe. The "smart quote" created by marked is facing the wrong
+      // direction. This looks for a smart quote facing the wrong direction
+      // immediately following an HTML tag and "flips" it the other way.
+      const fixedHtml = html.replace(/>‘/g, '>’')
+
+      return fixedHtml
     }
   },
 }
