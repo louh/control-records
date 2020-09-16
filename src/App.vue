@@ -206,6 +206,7 @@ button {
   cursor: pointer;
   color: #333;
   font-family: 'OCR F OT', sans-serif;
+  font-size: inherit;
 }
 
 button:last-child {
@@ -270,5 +271,12 @@ footer a:active {
 
 .controls {
   margin-bottom: 0.5em;
+  font-size: 11px;
+}
+
+@media only screen and (min-width: 768px) {
+  .controls {
+    font-size: 13px;
+  }
 }
 </style>

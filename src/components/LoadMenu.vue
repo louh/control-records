@@ -56,7 +56,6 @@ export default {
   margin-top: -0.5em;
   color: #333;
   font-family: 'OCR F OT', sans-serif;
-  font-size: 11px;
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
