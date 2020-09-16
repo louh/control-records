@@ -30,6 +30,7 @@
 import { jsPDF } from 'jspdf'
 import Page from './components/Page'
 import Editor from './components/Editor'
+import docs from './docs.json'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
 
@@ -37,13 +38,6 @@ function calculateHTMLScale (el) {
   const srcwidth = el.scrollWidth
   return LETTER_WIDTH_72DPI / srcwidth / window.devicePixelRatio / 1.45
 }
-
-const files = [
-  'ai11-ue.md',
-  'ai63-ke.md',
-  'awe-48-summary.md',
-  'awe-48-supplement.md',
-]
 
 export default {
   name: 'App',
@@ -115,8 +109,8 @@ export default {
     },
   },
   mounted() {
-    const fileIndex = Math.floor(Math.random() * files.length)
-    window.fetch(`/docs/${files[fileIndex]}`)
+    const fileIndex = Math.floor(Math.random() * docs.length)
+    window.fetch(`/docs/${docs[fileIndex].filename}`)
       .then((response) => response.text())
       .then((content) => {
         this.content = content
@@ -126,6 +120,31 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'OCR F OT';
+  src: url('/fonts/ocrfot/OCRFOT.woff2') format('woff2'),
+       url('/fonts/ocrfot/OCRFOT.woff') format('woff'),
+       url('/fonts/ocrfot/OCRFOT.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: normal;
+  src: local('Helvetica Neue'),
+       url('/fonts/helvetica-neue/HelveticaNeue.woff2') format('woff2'),
+       url('/fonts/helvetica-neue/HelveticaNeue.woff') format('woff'),
+       url('/fonts/helvetica-neue/HelveticaNeue.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: bold;
+  src: local('Helvetica Neue Bold'),
+       url('/fonts/helvetica-neue/HelveticaNeue-Bold.woff2') format('woff2'),
+       url('/fonts/helvetica-neue/HelveticaNeue-Bold.woff') format('woff'),
+       url('/fonts/helvetica-neue/HelveticaNeue-Bold.ttf') format('truetype');
+}
+
 html {
   box-sizing: border-box;
   overflow-x: hidden;
@@ -157,60 +176,6 @@ main {
   width: 95vw;
   max-width: 1000px;
   margin: 0 auto;
-}
-
-footer {
-  margin-top: 1em;
-  text-align: right;
-  color: #333;
-}
-
-footer a,
-footer a:visited {
-  color: #333;
-}
-
-footer a:hover,
-footer a:active {
-  color: #666;
-}
-
-@font-face {
-  font-family: 'OCR F OT';
-  src: url('/fonts/ocrfot/OCRFOT.woff2') format('woff2'),
-       url('/fonts/ocrfot/OCRFOT.woff') format('woff'),
-       url('/fonts/ocrfot/OCRFOT.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: normal;
-  src: local('Helvetica Neue'),
-       url('/fonts/helvetica-neue/HelveticaNeue.woff2') format('woff2'),
-       url('/fonts/helvetica-neue/HelveticaNeue.woff') format('woff'),
-       url('/fonts/helvetica-neue/HelveticaNeue.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: bold;
-  src: local('Helvetica Neue Bold'),
-       url('/fonts/helvetica-neue/HelveticaNeue-Bold.woff2') format('woff2'),
-       url('/fonts/helvetica-neue/HelveticaNeue-Bold.woff') format('woff'),
-       url('/fonts/helvetica-neue/HelveticaNeue-Bold.ttf') format('truetype');
-}
-
-.beta {
-  text-transform: uppercase;
-  font-weight: normal;
-  letter-spacing: 0.05em;
-  color: #868686;
-  text-decoration: none;
-  font-size: 0.5em;
-}
-
-.controls {
-  margin-bottom: 0.5em;
 }
 
 button {
@@ -256,5 +221,37 @@ button:hover {
   footer {
     display: none;
   }
+}
+</style>
+
+<style scoped>
+footer {
+  margin-top: 1.5em;
+  margin-left: 1em;
+  text-align: right;
+  color: #777;
+}
+
+footer a,
+footer a:visited {
+  color: #444;
+}
+
+footer a:hover,
+footer a:active {
+  color: #777;
+}
+
+.beta {
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  color: #868686;
+  text-decoration: none;
+  font-size: 0.5em;
+}
+
+.controls {
+  margin-bottom: 0.5em;
 }
 </style>
