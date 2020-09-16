@@ -1,5 +1,10 @@
 [
   {
+    "filename": "oop3-ue.md",
+    "code": "OOP3-UE",
+    "label": "Hotline"
+  },
+  {
     "filename": "oop5-ke.md",
     "code": "OOP5-KE",
     "label": "Floppy Disk"
@@ -10,9 +15,19 @@
     "label": "Benicoff TV"
   },
   {
+    "filename": "oop10-ke.md",
+    "code": "OOP10-KE",
+    "label": "Jukebox"
+  },
+  {
     "filename": "oop11-ke.md",
     "code": "OOP11-KE",
     "label": "Astray and Cigarette"
+  },
+  {
+    "filename": "oop22-ke.md",
+    "code": "OOP22-KE",
+    "label": "Home Safe"
   },
   {
     "filename": "ai11-ue.md",

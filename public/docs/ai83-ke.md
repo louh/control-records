@@ -2,7 +2,7 @@
 
 ## Background:
 
-The page was discovered in an instance of the the Oceanview Motel and Casino that was linked to the Investigations Sector. The page had been pushed into the motel’s corridor from under the door with the symbol of a Spiral. ~xxxxxxxxxxxxxxxxxxxxxx~
+The page was discovered in an instance of the the Oceanview Motel and Casino that was linked to the Investigations Sector. The page had been pushed into the motel’s corridor from under the door with the symbol of a Spiral. ~~xxxxxxxxxxxxxxxxxxxxxx~~
 
 ## Appendix:
 
