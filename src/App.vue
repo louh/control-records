@@ -2,8 +2,16 @@
   <main class="container">
     <h1>Federal Bureau of Control / Records <sup class="beta">beta</sup></h1>
     <div class="controls">
-      <button @click="handleLoad">Load</button>
-      <LoadMenu v-if="isLoadMenuOpen" :items="docs" @change="loadSelected" />
+      <button @click="handleLoad" ref="loadButton">Load</button>
+      <LoadMenu
+        v-if="isLoadMenuOpen"
+        v-closable="{
+          exclude: ['loadButton'],
+          handler: 'closeMenu'
+        }"
+        :items="docs"
+        @change="loadSelected"
+      />
       <button @click="handleEdit">Edit</button>
       <button @click="handleReset">Reset</button>
       <button @click="handlePrint">Print</button>
@@ -123,6 +131,9 @@ export default {
         .then((content) => {
           this.content = content
         })
+    },
+    closeMenu: function () {
+      this.isLoadMenuOpen = false
     }
   },
   mounted() {

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './click-outside.directive.js'
 import App from './App.vue'
 
 // Import Vue Markdown Editor

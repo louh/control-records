@@ -118,4 +118,10 @@ export default {
 .v-md-editor .codemirror-wrapper .CodeMirror pre {
   word-break: normal !important;
 }
+
+.v-md-editor .codemirror-wrapper .cm-header,
+.v-md-editor .codemirror-wrapper .cm-link,
+.v-md-editor .codemirror-wrapper .cm-url {
+  color: #222 !important;
+}
 </style>
