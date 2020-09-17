@@ -1,4 +1,4 @@
-# Human Hand Chair (Al63-KE)
+# Human Hand Chair (AI63-KE)
 
 ## CONTAINMENT PROCEDURE:
 

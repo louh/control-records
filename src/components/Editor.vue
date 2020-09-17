@@ -113,4 +113,9 @@ export default {
   padding: 0.75em 1em;
   background-color: rgba(0,0,0,.75);
 }
+
+/* Override v-md-editor's word-break override */
+.v-md-editor .codemirror-wrapper .CodeMirror pre {
+  word-break: normal !important;
+}
 </style>
