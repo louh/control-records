@@ -124,4 +124,19 @@ export default {
 .v-md-editor .codemirror-wrapper .cm-url {
   color: #222 !important;
 }
+
+/* Style text to mimic render.
+Note that <del> does not have wrapping tags to style */
+.cm-em {
+  font-style: normal !important;
+  text-decoration: underline;
+}
+
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  text-decoration: underline;
+}
 </style>
