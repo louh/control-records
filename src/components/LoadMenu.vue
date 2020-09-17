@@ -48,7 +48,7 @@ export default {
   position: absolute;
   z-index: 1;
   width: calc(100% - 20px);
-  max-height: 80%;
+  max-height: calc(100vh - 160px);
   background-color: #f2f3f7;
   border: 1px solid darkgray;
   border-radius: 3px;
@@ -85,7 +85,7 @@ export default {
 @media only screen and (min-width: 500px) {
   .menu {
     max-width: 300px;
-    max-height: min(80%, 600px);
+    max-height: min(calc(100vh - 160px), 600px);
   }
 }
 </style>

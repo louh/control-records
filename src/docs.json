@@ -1,5 +1,10 @@
 [
   {
+    "filename": "oop1-ke.md",
+    "code": "OOP1-KE",
+    "label": "Service Weapon"
+  },
+  {
     "filename": "oop3-ue.md",
     "code": "OOP3-UE",
     "label": "Hotline"
@@ -25,14 +30,34 @@
     "label": "Astray and Cigarette"
   },
   {
+    "filename": "oop15-ue.md",
+    "code": "OOP15-UE",
+    "label": "Slide Projector"
+  },
+  {
+    "filename": "oop16-ke.md",
+    "code": "OOP16-KE",
+    "label": "Merry-Go-Round Horse"
+  },
+  {
+    "filename": "oop18-pe.md",
+    "code": "OOP18-PE",
+    "label": "X-Ray Light Box"
+  },
+  {
     "filename": "oop22-ke.md",
     "code": "OOP22-KE",
     "label": "Home Safe"
   },
   {
-    "filename": "ai11-ue.md",
+    "filename": "ai11-ue-procedures.md",
     "code": "AI11-UE",
-    "label": "Ocelot’s Anchor"
+    "label": "Anchor Procedures"
+  },
+  {
+    "filename": "ai11-ue-supplement.md",
+    "code": "AI11-UE",
+    "label": "Anchor Supplement"
   },
   {
     "filename": "ai63-ke.md",
