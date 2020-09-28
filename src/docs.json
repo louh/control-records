@@ -50,6 +50,36 @@
     "label": "Home Safe"
   },
   {
+    "filename": "ai3-ke-procedures.md",
+    "code": "AI3-KE",
+    "label": "Fan Procedures"
+  },
+  {
+    "filename": "ai3-ke-supplement.md",
+    "code": "AI3-KE",
+    "label": "Fan Supplement"
+  },
+  {
+    "filename": "ai5-be-procedures.md",
+    "code": "AI5-BE",
+    "label": "Hammer Procedures"
+  },
+  {
+    "filename": "ai5-be-supplement.md",
+    "code": "AI5-BE",
+    "label": "Hammer Supplement"
+  },
+  {
+    "filename": "ai7-ke-procedures.md",
+    "code": "AI7-KE",
+    "label": "Mannequin Procedures"
+  },
+  {
+    "filename": "ai7-ke-supplement.md",
+    "code": "AI7-KE",
+    "label": "Mannequin Supplement"
+  },
+  {
     "filename": "ai11-ue-procedures.md",
     "code": "AI11-UE",
     "label": "Anchor Procedures"
@@ -60,14 +90,149 @@
     "label": "Anchor Supplement"
   },
   {
+    "filename": "ai40-pe-procedures.md",
+    "code": "AI40-PE",
+    "label": "Arcade Cabinets Procedures"
+  },
+  {
+    "filename": "ai48-pe.md",
+    "code": "AI48-PE",
+    "label": "Maneki-neko Procedures"
+  },
+  {
+    "filename": "ai58-ke-procedures.md",
+    "code": "AI58-KE",
+    "label": "Balloon Procedures"
+  },
+  {
+    "filename": "ai58-ke-supplement.md",
+    "code": "AI58-KE",
+    "label": "Balloon Supplement"
+  },
+  {
+    "filename": "ai60-ue-procedures.md",
+    "code": "AI60-UE",
+    "label": "Mirror Procedures"
+  },
+  {
+    "filename": "ai60-ue-supplement.md",
+    "code": "AI60-UE",
+    "label": "Mirror Supplement"
+  },
+  {
     "filename": "ai63-ke.md",
     "code": "AI63-KE",
     "label": "Human Hand Chair"
   },
   {
+    "filename": "ai72-pe-procedures.md",
+    "code": "AI72-PE",
+    "label": "Globe Procedures"
+  },
+  {
+    "filename": "ai72-pe-supplement.md",
+    "code": "AI72-PE",
+    "label": "Globe Supplement"
+  },
+  {
+    "filename": "ai77-ke.md",
+    "code": "AI77-KE",
+    "label": "Letters Procedures"
+  },
+  {
+    "filename": "awe-3-summary.md",
+    "code": "AWE-3",
+    "label": "Meteor Hill Summary"
+  },
+  {
+    "filename": "awe-3-supplement.md",
+    "code": "AWE-3",
+    "label": "Meteor Hill Supplement"
+  },
+  {
     "filename": "awe-10-summary.md",
     "code": "AWE-10",
     "label": "Bright Falls (1976) Summary"
+  },
+  {
+    "filename": "awe-10-supplement.md",
+    "code": "AWE-10",
+    "label": "Bright Falls (1976) Supplement"
+  },
+  {
+    "filename": "awe-17-summary.md",
+    "code": "AWE-17",
+    "label": "Butte Summary"
+  },
+  {
+    "filename": "awe-17-supplement.md",
+    "code": "AWE-17",
+    "label": "Butte Supplement"
+  },
+  {
+    "filename": "awe-18-summary.md",
+    "code": "AWE-18",
+    "label": "Emergency Call Summary"
+  },
+  {
+    "filename": "awe-18-supplement.md",
+    "code": "AWE-18",
+    "label": "Emergency Call Supplement"
+  },
+  {
+    "filename": "awe-24-summary.md",
+    "code": "AWE-24",
+    "label": "Ordinary Summary"
+  },
+  {
+    "filename": "awe-24-supplement.md",
+    "code": "AWE-24",
+    "label": "Ordinary Supplement"
+  },
+  {
+    "filename": "awe-29-summary.md",
+    "code": "AWE-29",
+    "label": "Albany Summary"
+  },
+  {
+    "filename": "awe-29-supplement.md",
+    "code": "AWE-29",
+    "label": "Albany Supplement"
+  },
+  {
+    "filename": "awe-35-summary.md",
+    "code": "AWE-35",
+    "label": "Bright Falls Summary"
+  },
+  {
+    "filename": "awe-35-supplement.md",
+    "code": "AWE-35",
+    "label": "Bright Falls Supplement"
+  },
+  {
+    "filename": "awe-37-summary.md",
+    "code": "AWE-37",
+    "label": "Kyiv Summary"
+  },
+  {
+    "filename": "awe-37-supplement.md",
+    "code": "AWE-37",
+    "label": "Kyiv Supplement"
+  },
+  {
+    "filename": "awe-44.md",
+    "code": "AWE-44",
+    "label": "Eagle Limited Summary"
+  },
+  {
+    "filename": "awe-46-summary.md",
+    "code": "AWE-46",
+    "label": "Sterling Summary"
+  },
+  {
+    "filename": "awe-46-supplement.md",
+    "code": "AWE-46",
+    "label": "Sterling Supplement"
   },
   {
     "filename": "awe-48-summary.md",

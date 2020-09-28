@@ -45,6 +45,11 @@ export default {
 
 <!-- not scoped because the elements we want to style are dynamically generated -->
 <style>
+.content {
+  /* Allows tiny gap between redacted boxes */
+  line-height: 1.25;
+}
+
 .content del {
   position: relative;
   background-color: black;

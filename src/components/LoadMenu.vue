@@ -5,6 +5,7 @@
         v-for="item in sortedItems"
         :key="item.label + '|' + item.code"
         @click="handleSelect(item)"
+        tabindex="0"
       >
         {{ item.label }} <span>({{ item.code }})</span>
       </li>
@@ -74,6 +75,7 @@ export default {
   cursor: pointer;
 }
 
+.menu li:focus,
 .menu li:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
