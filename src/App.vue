@@ -82,7 +82,7 @@ export default {
         this.recno = Math.floor(Math.random() * 1000000000)
         this.stamp = false
         this.seal = 'Color'
-        window.fetch('/docs/ai83-ke.md')
+        window.fetch('/docs/ai83-ke-procedures.md')
           .then((response) => response.text())
           .then((content) => {
             this.content = content

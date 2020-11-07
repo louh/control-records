@@ -80,6 +80,16 @@
     "label": "Mannequin Supplement"
   },
   {
+    "filename": "ai10-ke-procedures.md",
+    "code": "AI10-KE",
+    "label": "Refrigerator Procedures"
+  },
+  {
+    "filename": "ai10-ke-supplement.md",
+    "code": "AI10-KE",
+    "label": "Refrigerator Supplement"
+  },
+  {
     "filename": "ai11-ue-procedures.md",
     "code": "AI11-UE",
     "label": "Anchor Procedures"
@@ -90,14 +100,114 @@
     "label": "Anchor Supplement"
   },
   {
+    "filename": "ai12-pe-procedures.md",
+    "code": "AI12-PE",
+    "label": "VHS Tape Procedures"
+  },
+  {
+    "filename": "ai12-pe-supplement.md",
+    "code": "AI12-PE",
+    "label": "VHS Tape Supplement"
+  },
+  {
+    "filename": "ai13-ke-procedures.md",
+    "code": "AI13-KE",
+    "label": "Pram Procedures"
+  },
+  {
+    "filename": "ai13-ke-supplement.md",
+    "code": "AI13-KE",
+    "label": "Pram Supplement"
+  },
+  {
+    "filename": "ai14-ae-procedures.md",
+    "code": "AI14-AE",
+    "label": "Plastic Tree Procedures"
+  },
+  {
+    "filename": "ai14-ae-supplement.md",
+    "code": "AI14-AE",
+    "label": "Plastic Tree Supplement"
+  },
+  {
+    "filename": "ai19-ke-procedures.md",
+    "code": "AI19-KE",
+    "label": "Swan Boat Procedures"
+  },
+  {
+    "filename": "ai31-pe-procedures.md",
+    "code": "AI31-PE",
+    "label": "Post Box Procedures"
+  },
+  {
+    "filename": "ai31-pe-supplement.md",
+    "code": "AI31-PE",
+    "label": "Post Box Supplement"
+  },
+  {
     "filename": "ai40-pe-procedures.md",
     "code": "AI40-PE",
     "label": "Arcade Cabinets Procedures"
   },
   {
+    "filename": "ai40-pe-supplement.md",
+    "code": "AI40-PE",
+    "label": "Arcade Cabinets Supplement"
+  },
+  {
+    "filename": "ai43-pe-procedures.md",
+    "code": "AI43-PE",
+    "label": "Surfboard Procedures"
+  },
+  {
+    "filename": "ai43-pe-supplement.md",
+    "code": "AI43-PE",
+    "label": "Surfboard Supplement"
+  },
+  {
+    "filename": "ai46-ke-procedures.md",
+    "code": "AI46-KE",
+    "label": "Pink Flamingo Procedures"
+  },
+  {
+    "filename": "ai46-ke-supplement.md",
+    "code": "AI46-KE",
+    "label": "Pink Flamingo Supplement"
+  },
+  {
     "filename": "ai48-pe.md",
     "code": "AI48-PE",
     "label": "Maneki-neko Procedures"
+  },
+  {
+    "filename": "ai49-ke.md",
+    "code": "AI49-KE",
+    "label": "Traffic Light Procedures"
+  },
+  {
+    "filename": "ai52-ae-procedures.md",
+    "code": "AI52-AE",
+    "label": "Rubber Duck Procedures"
+  },
+  {
+    "filename": "ai52-ae-supplement.md",
+    "code": "AI52-AE",
+    "label": "Rubber Duck Supplement"
+  },
+  {
+    "filename": "ai53-ke.md",
+    "code": "AI53-KE",
+    "label": "Water Cooler Procedures"
+  },
+  {
+    "filename": "ai54-ue-procedures.md",
+    "code": "AI54-UE",
+    "label": "Picnic Basket Procedures"
+  },
+  {
+    "filename": "ai54-ue-supplement.md",
+    "code": "AI54-UE",
+    "label": "Picnic Basket Supplement"
   },
   {
     "filename": "ai58-ke-procedures.md",
@@ -125,6 +235,16 @@
     "label": "Human Hand Chair"
   },
   {
+    "filename": "ai69-ke-procedures.md",
+    "code": "AI69-KE",
+    "label": "Paper Lantern Procedures"
+  },
+  {
+    "filename": "ai69-ke-supplement.md",
+    "code": "AI69-KE",
+    "label": "Paper Lantern Supplement"
+  },
+  {
     "filename": "ai72-pe-procedures.md",
     "code": "AI72-PE",
     "label": "Globe Procedures"
@@ -135,9 +255,49 @@
     "label": "Globe Supplement"
   },
   {
+    "filename": "ai73-ue-procedures.md",
+    "code": "AI73-UE",
+    "label": "Thermos Procedures"
+  },
+  {
     "filename": "ai77-ke.md",
     "code": "AI77-KE",
     "label": "Letters Procedures"
+  },
+  {
+    "filename": "ai80-ue-procedures.md",
+    "code": "AI80-UE",
+    "label": "Movie Camera Procedures"
+  },
+  {
+    "filename": "ai80-ue-supplement.md",
+    "code": "AI80-UE",
+    "label": "Movie Camera Supplement"
+  },
+  {
+    "filename": "ai81-ke.md",
+    "code": "AI81-KE",
+    "label": "Vending Machine Procedures"
+  },
+  {
+    "filename": "ai82-ke-procedures.md",
+    "code": "AI82-KE",
+    "label": "Tractor Procedures"
+  },
+  {
+    "filename": "ai82-ke-supplement.md",
+    "code": "AI82-KE",
+    "label": "Tractor Supplement"
+  },
+  {
+    "filename": "ai83-ke-procedures.md",
+    "code": "AI83-KE",
+    "label": "Typewritten Page Procedures"
+  },
+  {
+    "filename": "ai83-ke-supplement.md",
+    "code": "AI83-KE",
+    "label": "Typewritten Page Supplement"
   },
   {
     "filename": "awe-3-summary.md",
