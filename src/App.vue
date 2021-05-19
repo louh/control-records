@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <h1>Federal Bureau of Control / Records <sup class="beta">beta</sup></h1>
+    <h1>Federal Bureau of Control / Records Archive System</h1>
     <div class="controls">
       <button @click="handleLoad" ref="loadButton">Load</button>
       <LoadMenu
@@ -274,15 +274,6 @@ footer a:active {
 
 footer span {
   white-space: nowrap;
-}
-
-.beta {
-  text-transform: uppercase;
-  font-weight: normal;
-  letter-spacing: 0.05em;
-  color: #868686;
-  text-decoration: none;
-  font-size: 0.5em;
 }
 
 .controls {
