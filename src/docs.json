@@ -265,6 +265,11 @@
     "label": "Letters Procedures"
   },
   {
+    "filename": "ai78-ue-procedures.md",
+    "code": "AI78-UE",
+    "label": "Train Car Procedures"
+  },
+  {
     "filename": "ai80-ue-procedures.md",
     "code": "AI80-UE",
     "label": "Movie Camera Procedures"
@@ -308,6 +313,16 @@
     "filename": "awe-3-supplement.md",
     "code": "AWE-3",
     "label": "Meteor Hill Supplement"
+  },
+  {
+    "filename": "awe-7-summary.md",
+    "code": "AWE-7",
+    "label": "Fra Mauro Summary"
+  },
+  {
+    "filename": "awe-7-supplement.md",
+    "code": "AWE-7",
+    "label": "Fra Mauro Supplement"
   },
   {
     "filename": "awe-10-summary.md",
@@ -380,9 +395,14 @@
     "label": "Kyiv Supplement"
   },
   {
-    "filename": "awe-44.md",
+    "filename": "awe-44-summary.md",
     "code": "AWE-44",
     "label": "Eagle Limited Summary"
+  },
+  {
+    "filename": "awe-44-supplement.md",
+    "code": "AWE-44",
+    "label": "Eagle Limited Supplement"
   },
   {
     "filename": "awe-46-summary.md",
