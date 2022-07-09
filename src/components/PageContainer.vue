@@ -4,7 +4,7 @@
       <header>
         <HeaderBox :recno="recno"></HeaderBox>
         <img v-if="seal === 'Color'" src="../assets/fbc-seal-color.png" alt="" draggable="false" />
-        <img v-if="seal === 'B/W'" src="../assets/fbc-seal-bw.png" alt="" draggable="false" />
+        <img v-if="seal === 'B/W'" src="../assets/fbc-seal-bw.svg" alt="" draggable="false" />
       </header>
       <div class="body">
         <PageBodyContent :content="content"></PageBodyContent>
