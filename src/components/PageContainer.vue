@@ -21,14 +21,14 @@
         </div>
       </footer>
     </div>
-    <Stamp v-if="stamp" />
+    <CopyStamp v-if="stamp" />
   </div>
 </template>
 
 <script>
-import HeaderBox from './HeaderBox'
-import PageBodyContent from './PageBodyContent'
-import Stamp from './Stamp'
+import HeaderBox from './HeaderBox.vue'
+import PageBodyContent from './PageBodyContent.vue'
+import CopyStamp from './CopyStamp.vue'
 
 export default {
   props: {
@@ -49,7 +49,7 @@ export default {
   components: {
     HeaderBox,
     PageBodyContent,
-    Stamp,
+    CopyStamp,
   },
 }
 </script>

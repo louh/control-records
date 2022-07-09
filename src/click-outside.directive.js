@@ -1,12 +1,10 @@
 /* https://tahazsh.com/detect-outside-click-in-vue */
-import Vue from 'vue'
-
 // This variable will hold the reference to
 // document's click handler
 let handleOutsideClick
 
-Vue.directive('closable', {
-  bind (el, binding, vnode) {
+export const closable = {
+  beforeMount: (el, binding) => {
     // Here's the click/touchstart handler
     // (it is registered below)
     handleOutsideClick = (e) => {
@@ -22,7 +20,7 @@ Vue.directive('closable', {
         // any excluded element yet
         if (!clickedOnExcludedEl) {
           // Get the element using the reference name
-          const excludedEl = vnode.context.$refs[refName]
+          const excludedEl = binding.instance.$refs[refName]
           // See if this excluded element
           // is the same element the user just clicked on
           clickedOnExcludedEl = excludedEl.contains(e.target)
@@ -35,7 +33,7 @@ Vue.directive('closable', {
         // If the clicked element is outside the dialog
         // and not the button, then call the outside-click handler
         // from the same component this directive is used in
-        vnode.context[handler]()
+        binding.instance[handler]()
       }
     }
     // Register click/touchstart event listeners on the whole page
@@ -43,10 +41,10 @@ Vue.directive('closable', {
     document.addEventListener('touchstart', handleOutsideClick)
   },
 
-  unbind () {
+  unmounted: () => {
     // If the element that has v-closable is removed, then
     // unbind click/touchstart listeners from the whole page
     document.removeEventListener('click', handleOutsideClick)
     document.removeEventListener('touchstart', handleOutsideClick)
   }
-})
+}
