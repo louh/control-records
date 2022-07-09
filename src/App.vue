@@ -132,6 +132,8 @@ export default {
         .then((response) => response.text())
         .then((content) => {
           this.content = content
+          // Reset NAR on loading new content
+          this.recno = Math.floor(Math.random() * 1000000000)
         })
     },
     closeMenu: function () {
