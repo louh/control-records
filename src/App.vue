@@ -19,7 +19,7 @@
       <button @click="handleToggleSeal">Toggle seal: {{ seal }}</button>
       <button @click="handleToggleStamp">Toggle copy stamp: {{ stamp ? 'On' : 'Off' }}</button>
     </div>
-    <Page :recno="recno" :seal="seal" :stamp="stamp" :content="content"></Page>
+    <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
     <footer>
       A fan project inspired by
       <a href="https://www.remedygames.com/games/control/" target="_blank" rel="noreferer noopener">Control</a>, a game by Remedy Entertainment.
@@ -27,21 +27,22 @@
       &nbsp;
       <span><a href="https://github.com/louh/control-records/" target="_blank" rel="noreferer noopener">Source code</a></span>
     </footer>
-    <Editor
+    <ContentEditor
       :key="content"
       :isActive="isEditorActive"
       v-on:update:isEditorActive="isEditorActive = $event"
       :content="content"
       v-on:update:content="content = $event"
-    ></Editor>
+    ></ContentEditor>
   </main>
 </template>
 
 <script>
 import { jsPDF } from 'jspdf'
-import Page from './components/Page'
-import Editor from './components/Editor'
-import LoadMenu from './components/LoadMenu'
+import { closable } from './click-outside.directive.js'
+import PageContainer from './components/PageContainer.vue'
+import ContentEditor from './components/ContentEditor.vue'
+import LoadMenu from './components/LoadMenu.vue'
 import docs from './docs.json'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
@@ -54,8 +55,8 @@ function calculateHTMLScale (el) {
 export default {
   name: 'App',
   components: {
-    Page,
-    Editor,
+    PageContainer,
+    ContentEditor,
     LoadMenu,
   },
   data() {
@@ -144,6 +145,9 @@ export default {
       .then((content) => {
         this.content = content
       })
+  },
+  directives: {
+    closable
   }
 }
 </script>

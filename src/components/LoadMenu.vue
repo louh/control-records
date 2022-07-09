@@ -40,7 +40,7 @@ export default {
     handleSelect: function (item) {
       this.$emit('change', item)
     }
-  },
+  }
 }
 </script>
 

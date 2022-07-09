@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default {
@@ -39,7 +39,7 @@ export default {
 
       return fixedHtml
     }
-  },
+  }
 }
 </script>
 
