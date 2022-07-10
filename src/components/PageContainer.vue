@@ -111,6 +111,11 @@ export default {
   .body {
     flex-grow: 1;
     overflow: hidden;
+
+    /* Small buffer on left side to allow skewed black highlighter effect
+    from getting visually cropped */
+    padding-left: 5px;
+    margin-left: -5px;
   }
 
   header {

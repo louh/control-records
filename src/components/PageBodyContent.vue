@@ -59,6 +59,10 @@ export default {
   --webkit-print-color-adjust: exact;
   color-adjust: exact;
   user-select: none;
+  /* Match black highlighter experience with game */
+  transform: skew(-6deg);
+  display: inline-block;
+  border-radius: 0.125em;
 }
 
 .content h1 {
