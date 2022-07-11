@@ -15,7 +15,8 @@
     "dompurify": "^2.3.8",
     "jspdf": "^2.5.1",
     "marked": "^4.0.17",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
