@@ -3,8 +3,8 @@
     <div class="contents">
       <header>
         <HeaderBox :recno="recno"></HeaderBox>
-        <img v-if="seal === 'Color'" src="../assets/fbc-seal-color.png" alt="" draggable="false" />
-        <img v-if="seal === 'B/W'" src="../assets/fbc-seal-bw.svg" alt="" draggable="false" />
+        <img v-if="seal === 'color'" src="../assets/fbc-seal-color.png" alt="" draggable="false" />
+        <img v-if="seal === 'bw'" src="../assets/fbc-seal-bw.svg" alt="" draggable="false" />
       </header>
       <div class="body">
         <PageBodyContent :content="content"></PageBodyContent>
@@ -17,7 +17,7 @@
           Federal Bureau of Control, New York City, New York
         </div>
         <div>
-          (1) Document Archive RECNO: NAR{{ recno.toString().padStart(9, '0') }}
+          (1) Document Archive RECNO: NAR{{ recno }}
         </div>
       </footer>
     </div>
@@ -32,9 +32,9 @@ import CopyStamp from './CopyStamp.vue'
 
 export default {
   props: {
-    recno: Number,
+    recno: String,
     seal: {
-      default: 'Color',
+      default: 'color',
       type: String
     },
     stamp: {
