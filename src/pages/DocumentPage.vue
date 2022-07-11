@@ -16,8 +16,8 @@
         <button @click="handleReset">Reset</button>
         <button @click="handlePrint">Print</button>
         <!-- button @click="handleExportPDF">Export PDF (beta)</button -->
-        <button @click="handleToggleSeal">Toggle seal: {{ seal }}</button>
-        <button @click="handleToggleStamp">Toggle copy stamp: {{ stamp ? 'On' : 'Off' }}</button>
+        <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
+        <button @click="handleToggleStamp">Toggle copy stamp: {{ stampButtonLabel }}</button>
       </div>
       <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
     </template>
@@ -48,7 +48,7 @@ function calculateHTMLScale (el) {
 }
 
 export default {
-  name: 'App',
+  name: 'DocumentPage',
   components: {
     PageTemplate,
     PageContainer,
@@ -58,12 +58,28 @@ export default {
   data() {
     return {
       docs: docs,
-      recno: Math.floor(Math.random() * 1000000000),
-      seal: 'Color',
+      recno: Math.floor(Math.random() * 1000000000).toString().padStart(9, '0'),
+      seal: 'color',
       stamp: Math.random() < 0.5,
       content: '',
       isEditorActive: false,
       isLoadMenuOpen: false,
+    }
+  },
+  computed: {
+    sealButtonLabel () {
+      switch(this.seal) {
+        case 'color':
+          return 'Color'
+        case 'bw':
+          return 'B/W'
+        case 'none':
+        default:
+          return 'Off'
+      }
+    },
+    stampButtonLabel () {
+      return this.stamp ? 'On' : 'Off'
     }
   },
   methods: {
@@ -78,7 +94,7 @@ export default {
       if (window.confirm('Are you sure you want to reset this document?')) {
         this.recno = Math.floor(Math.random() * 1000000000)
         this.stamp = false
-        this.seal = 'Color'
+        this.seal = 'color'
         window.fetch('/docs/ai83-ke-procedures.md')
           .then((response) => response.text())
           .then((content) => {
@@ -105,17 +121,17 @@ export default {
     },
     handleToggleSeal: function () {
       switch (this.seal) {
-        case 'Color':
-          this.seal = 'B/W'
+        case 'color':
+          this.seal = 'bw'
           break
-        case 'B/W':
-          this.seal = 'Off'
+        case 'bw':
+          this.seal = 'none'
           break
-        case 'Off':
-          this.seal = 'Color'
+        case 'none':
+          this.seal = 'color'
           break
         default:
-          this.seal = 'Color'
+          this.seal = 'color'
           break
       }
     },

@@ -5,7 +5,7 @@
     </div>
     <div class="text">
       <span>FBC DOCUMENTREC</span>
-      <span>#NAR{{ recno.toString().padStart(9, '0') }}</span>
+      <span>#NAR{{ recno }}</span>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
   props: {
-    recno: Number
+    recno: String
   }
 }
 </script>
