@@ -19,7 +19,7 @@
         <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
         <button @click="handleToggleStamp">Toggle copy stamp: {{ stampButtonLabel }}</button>
       </div>
-      <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
+      <PageContainer :recno="id || recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
     </template>
   </PageTemplate>
   <ContentEditor
@@ -33,6 +33,7 @@
 
 <script>
 import { jsPDF } from 'jspdf'
+import slugify from 'slugify'
 import { closable } from '../click-outside.directive.js'
 import PageContainer from '../components/PageContainer.vue'
 import ContentEditor from '../components/ContentEditor.vue'
@@ -96,7 +97,7 @@ export default {
         this.recno = this.makeRecno()
         this.stamp = false
         this.seal = 'color'
-        this.$router.push(`/document/ai83-ke-procedures`)
+        this.$router.push('/document/157318435/ai83-ke-typewritten-page-procedures')
         window.fetch('/docs/ai83-ke-procedures.md')
           .then((response) => response.text())
           .then((content) => {
@@ -142,7 +143,7 @@ export default {
     },
     loadSelected: function (opt) {
       this.isLoadMenuOpen = false
-      this.$router.push(`/document/${opt.filename.split('.')[0]}`)
+      this.$router.push(`/document/${opt.recno}/${this.makeSlug(opt)}`)
       window.fetch(`/docs/${opt.filename}`)
         .then((response) => response.text())
         .then((content) => {
@@ -157,11 +158,17 @@ export default {
     makeRecno: function () {
       return Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
     },
+    makeSlug: function (doc) {
+      return slugify(`${doc.code} ${doc.label}`, {
+        lower: true,
+        strict: true,
+      })
+    },
   },
   mounted() {
     let fileIndex
     if (this.id && typeof this.id === 'string') {
-      fileIndex = docs.findIndex(d => d.filename === this.id + '.md')
+      fileIndex = docs.findIndex(d => d.recno === this.id)
       if (fileIndex === -1) {
         this.$router.push({
           name: 'NotFound',
