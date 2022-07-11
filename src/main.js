@@ -37,9 +37,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: DocumentPage },
-    { path: '/document/:id', component: DocumentPage },
-    { path: '/document/:id/:slug', component: DocumentPage },
-    { path: '/:pathMatch(.*)', component: NotFoundPage }
+    { path: '/document/:id', component: DocumentPage, props: true },
+    { path: '/document/:id/:slug', component: DocumentPage, props: true },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundPage }
   ]
 })
 

@@ -55,10 +55,11 @@ export default {
     ContentEditor,
     LoadMenu,
   },
+  props: ['id', 'slug'],
   data() {
     return {
       docs: docs,
-      recno: Math.floor(Math.random() * 1000000000).toString().padStart(9, '0'),
+      recno: this.makeRecno(),
       seal: 'color',
       stamp: Math.random() < 0.5,
       content: '',
@@ -92,9 +93,10 @@ export default {
     },
     handleReset: function () {
       if (window.confirm('Are you sure you want to reset this document?')) {
-        this.recno = Math.floor(Math.random() * 1000000000)
+        this.recno = this.makeRecno()
         this.stamp = false
         this.seal = 'color'
+        this.$router.push(`/document/ai83-ke-procedures`)
         window.fetch('/docs/ai83-ke-procedures.md')
           .then((response) => response.text())
           .then((content) => {
@@ -140,25 +142,46 @@ export default {
     },
     loadSelected: function (opt) {
       this.isLoadMenuOpen = false
+      this.$router.push(`/document/${opt.filename.split('.')[0]}`)
       window.fetch(`/docs/${opt.filename}`)
         .then((response) => response.text())
         .then((content) => {
           this.content = content
           // Reset NAR on loading new content
-          this.recno = Math.floor(Math.random() * 1000000000)
+          this.recno = this.makeRecno()
         })
     },
     closeMenu: function () {
       this.isLoadMenuOpen = false
-    }
+    },
+    makeRecno: function () {
+      return Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
+    },
   },
   mounted() {
-    const fileIndex = Math.floor(Math.random() * docs.length)
-    window.fetch(`/docs/${docs[fileIndex].filename}`)
-      .then((response) => response.text())
-      .then((content) => {
-        this.content = content
-      })
+    let fileIndex
+    if (this.id && typeof this.id === 'string') {
+      fileIndex = docs.findIndex(d => d.filename === this.id + '.md')
+      if (fileIndex === -1) {
+        this.$router.push({
+          name: 'NotFound',
+          // preserve current path and remove the first char to avoid the target URL starting with `//`
+          params: { pathMatch: this.$route.path.substring(1).split('/') },
+          // preserve existing query and hash if any
+          query: this.$route.query,
+          hash: this.$route.hash,
+        })
+      }
+    } else {
+      fileIndex = Math.floor(Math.random() * docs.length)
+    }
+    if (fileIndex && fileIndex !== -1) {
+      window.fetch(`/docs/${docs[fileIndex].filename}`)
+        .then((response) => response.text())
+        .then((content) => {
+          this.content = content
+        })
+    }
   },
   directives: {
     closable
