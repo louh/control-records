@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import DocumentPage from './pages/DocumentPage.vue'
+import NotFoundPage from './pages/NotFoundPage.vue'
 
 // Import Vue Markdown Editor
 import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor'
@@ -30,7 +32,19 @@ VMdEditor.lang.add({
 VMdEditor.Codemirror = Codemirror
 VMdEditor.use(githubTheme)
 
-const app = createApp(App)
+// Setup routing
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    { path: '/', component: DocumentPage },
+    { path: '/document/:id', component: DocumentPage },
+    { path: '/document/:id/:slug', component: DocumentPage },
+    { path: '/:pathMatch(.*)', component: NotFoundPage }
+  ]
+})
 
+const app = createApp({})
+
+app.use(router)
 app.use(VMdEditor)
 app.mount('#app')
