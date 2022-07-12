@@ -60,9 +60,11 @@ export default {
   color-adjust: exact;
   user-select: none;
   /* Match black highlighter experience with game */
-  transform: skew(-6deg);
+  transform: skew(-5deg);
   display: inline-block;
   border-radius: 0.125em;
+  /* Need a gap between lines */
+  line-height: 1.2em;
 }
 
 .content h1 {
