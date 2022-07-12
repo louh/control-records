@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue/dist/vue.esm-bundler.js'
 import { createRouter, createWebHistory } from 'vue-router'
 import DocumentPage from './pages/DocumentPage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
