@@ -12,6 +12,14 @@
           height="500px"
         />
       </div>
+      <div class="record-input">
+        <label>Record number:</label>
+        <div class="record-input-control">
+          <span>NAR</span>
+          <input v-model="editedRecno" maxlength="9" />
+        </div>
+        <button>Generate a new record number</button>
+      </div>
       <div class="controls">
         <button @click="handleCancel">Cancel</button>
         <button @click="handleConfirm">Confirm</button>
@@ -25,16 +33,21 @@ export default {
   props: {
     isActive: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     content: {
       default: '',
-      type: String
-    }
+      type: String,
+    },
+    recno: {
+      default: '',
+      type: String,
+    },
   },
   data() {
     return {
-      editedContent: this.content
+      editedContent: this.content,
+      editedRecno: this.recno,
     }
   },
   methods: {
@@ -43,6 +56,7 @@ export default {
     },
     handleConfirm: function () {
       this.$emit('update:content', this.editedContent)
+      this.$emit('update:recno', this.editedRecno)
       this.$emit('update:isEditorActive', false)
     },
   }
@@ -76,7 +90,7 @@ export default {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   width: 100%;
   margin: 20px;
-  max-width: 600px;
+  max-width: 800px;
   max-height: 800px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -98,11 +112,52 @@ export default {
 
 .body {
   flex-grow: 1;
+  margin-bottom: 1em;
 }
 
 .v-md-editor {
   box-shadow: none;
   border: 1px solid #ddd;
+}
+
+.record-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.record-input label {
+  font-weight: bold;
+}
+
+.record-input-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 0.75em;
+  margin-right: 0.75em;
+  border: 1px solid darkgray;
+  border-radius: 3px;
+  padding: 0.25em 0.25em 0.25em 0.5em;
+  color: #888;
+  font-family: 'OCR F OT', sans-serif;
+}
+
+.record-input-control input {
+  appearance: none;
+  border: 0;
+  width: 120px;
+  height: 100%;
+  margin-left: 0.2em;
+  padding: 0.25em 0.5em 0.25em 0.1em;
+  color: #333;
+  font-family: 'OCR F OT', sans-serif;
+  font-size: inherit;
+}
+
+.record-input button {
+  flex-grow: 1;
+  margin-bottom: 0;
 }
 </style>
 
