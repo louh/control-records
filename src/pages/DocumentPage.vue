@@ -28,6 +28,8 @@
     v-on:update:isEditorActive="isEditorActive = $event"
     :content="content"
     v-on:update:content="content = $event"
+    :recno="recno"
+    v-on:update:recno="recno = $event"
   ></ContentEditor>
 </template>
 
