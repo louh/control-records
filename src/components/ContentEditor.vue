@@ -16,9 +16,12 @@
         <label>Record number:</label>
         <div class="record-input-control">
           <span>NAR</span>
-          <input v-model="editedRecno" maxlength="9" />
+          <input v-model="editedRecno" maxlength="9" @input="handleRecnoChange" />
         </div>
-        <button>Generate a new record number</button>
+        <button @click="handleGenerateRecno">Generate a new record number</button>
+      </div>
+      <div class="errors">
+        <p v-for="error in errors" :key="error">Error: {{error}}</p>
       </div>
       <div class="controls">
         <button @click="handleCancel">Cancel</button>
@@ -48,16 +51,37 @@ export default {
     return {
       editedContent: this.content,
       editedRecno: this.recno,
+      errors: [],
     }
   },
   methods: {
     handleCancel: function () {
       this.$emit('update:isEditorActive', false)
+      // Reset edited recno
+      this.editedRecno = this.recno
+      this.errors = []
     },
     handleConfirm: function () {
-      this.$emit('update:content', this.editedContent)
-      this.$emit('update:recno', this.editedRecno)
-      this.$emit('update:isEditorActive', false)
+      this.errors = []
+      if (this.editedRecno.length !== 9 || !this.editedRecno.match(/[0-9]{9}/)) {
+        this.errors.push('Record number must be a nine-digit number')
+      }
+
+      if (this.errors.length === 0) {
+        this.$emit('update:content', this.editedContent)
+        this.$emit('update:recno', this.editedRecno)
+        this.$emit('update:isEditorActive', false)
+      }
+    },
+    handleRecnoChange: function () {
+      this.errors = []
+    },
+    handleGenerateRecno: function () {
+      this.editedRecno = this.generateRecno()
+      this.errors = []
+    },
+    generateRecno: function () {
+      return Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
     },
   }
 }
@@ -158,6 +182,15 @@ export default {
 .record-input button {
   flex-grow: 1;
   margin-bottom: 0;
+}
+
+.errors {
+  margin-top: 1em;
+}
+
+.errors p {
+  font-weight: bold;
+  color: #e00000;
 }
 </style>
 
