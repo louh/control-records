@@ -229,6 +229,7 @@ export default {
     // If ID is provided and doc is found, display it + route to proper URL
     if (fileIndex && fileIndex !== -1) {
       const doc = docs[fileIndex]
+      this.$router.push(`/document/${doc.recno}/${this.makeSlug(doc)}`)
       window.fetch(`/docs/${doc.filename}`)
         .then((response) => response.text())
         .then((content) => {
