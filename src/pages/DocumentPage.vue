@@ -19,7 +19,7 @@
         <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
         <button @click="handleToggleStamp">Toggle copy stamp: {{ stampButtonLabel }}</button>
       </div>
-      <PageContainer :recno="id || recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
+      <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
     </template>
   </PageTemplate>
   <ContentEditor
@@ -37,13 +37,19 @@
 import { jsPDF } from 'jspdf'
 import slugify from 'slugify'
 import { closable } from '../click-outside.directive.js'
+import { localStorageAvailable } from '../localstorage.js'
 import PageContainer from '../components/PageContainer.vue'
 import ContentEditor from '../components/ContentEditor.vue'
 import LoadMenu from '../components/LoadMenu.vue'
 import PageTemplate from './PageTemplate.vue'
 import docs from '../docs.json'
+import M from 'minimatch'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
+
+// Localstorage keys
+const FBC_RECORD_SEAL = 'FBC_RECORD_SEAL'
+const FBC_RECORD_STAMP = 'FBC_RECORD_STAMP'
 
 function calculateHTMLScale (el) {
   const srcwidth = el.scrollWidth
@@ -62,9 +68,9 @@ export default {
   data() {
     return {
       docs: docs,
-      recno: this.makeRecno(),
-      seal: 'color',
-      stamp: Math.random() < 0.5,
+      recno: this.id || this.makeRecno(),
+      seal: this.getInitialSealValue(),
+      stamp: this.getInitialStampValue(),
       content: '',
       isEditorActive: false,
       isLoadMenuOpen: false,
@@ -84,9 +90,31 @@ export default {
     },
     stampButtonLabel () {
       return this.stamp ? 'On' : 'Off'
-    }
+    },
   },
   methods: {
+    getInitialSealValue: function () {
+      if (localStorageAvailable()) {
+        // Value is null if it doesn't exist
+        // in that case, return 'color'
+        const val = localStorage.getItem(FBC_RECORD_SEAL)
+        if (val !== null) return val
+        else return 'color'
+      } else {
+        // No localstorage, return default value
+        return 'color'
+      }
+    },
+    getInitialStampValue: function () {
+      if (localStorageAvailable()) {
+        // This should be a boolean value but is stored as a string
+        // Is false if value doesn't already exist, which is fine
+        return (localStorage.getItem(FBC_RECORD_STAMP) === 'true')
+      } else {
+        // No localstorage, generate a random value
+        return Math.random() < 0.5 
+      }
+    },
     handleLoad: function () {
       this.isLoadMenuOpen = !this.isLoadMenuOpen
     },
@@ -96,7 +124,6 @@ export default {
     },
     handleReset: function () {
       if (window.confirm('Are you sure you want to reset this document?')) {
-        this.recno = this.makeRecno()
         this.stamp = false
         this.seal = 'color'
         this.$router.push('/document/157318435/ai83-ke-typewritten-page-procedures')
@@ -104,7 +131,12 @@ export default {
           .then((response) => response.text())
           .then((content) => {
             this.content = content
+            this.recno = '157318435'
           })
+        if (localStorageAvailable()) {
+          localStorage.setItem(FBC_RECORD_SEAL, this.seal)
+          localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
+        }
       }
     },
     handlePrint: function () {
@@ -139,9 +171,15 @@ export default {
           this.seal = 'color'
           break
       }
+      if (localStorageAvailable()) {
+        localStorage.setItem(FBC_RECORD_SEAL, this.seal)
+      }
     },
     handleToggleStamp: function () {
       this.stamp = !this.stamp
+      if (localStorageAvailable()) {
+        localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
+      }
     },
     loadSelected: function (opt) {
       this.isLoadMenuOpen = false
@@ -150,13 +188,13 @@ export default {
         .then((response) => response.text())
         .then((content) => {
           this.content = content
-          // Reset NAR on loading new content
-          this.recno = this.makeRecno()
+          this.recno = opt.recno
         })
     },
     closeMenu: function () {
       this.isLoadMenuOpen = false
     },
+    // Should be a fallback of last resort
     makeRecno: function () {
       return Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
     },
@@ -185,10 +223,12 @@ export default {
       fileIndex = Math.floor(Math.random() * docs.length)
     }
     if (fileIndex && fileIndex !== -1) {
-      window.fetch(`/docs/${docs[fileIndex].filename}`)
+      const doc = docs[fileIndex]
+      window.fetch(`/docs/${doc.filename}`)
         .then((response) => response.text())
         .then((content) => {
           this.content = content
+          this.recno = doc.recno
         })
     }
   },
