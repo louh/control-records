@@ -13,7 +13,7 @@
           @change="loadSelected"
         />
         <button @click="handleEdit">Edit</button>
-        <button @click="handleReset">Reset</button>
+        <button @click="handleNew">New</button>
         <button @click="handlePrint">Print</button>
         <!-- button @click="handleExportPDF">Export PDF (beta)</button -->
         <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
@@ -122,19 +122,14 @@ export default {
       // TODO: opens an editor which reads from this.content, and sets this value
       this.isEditorActive = true
     },
-    handleReset: function () {
-      if (window.confirm('Are you sure you want to reset this document?')) {
+    handleNew: function () {
+      if (window.confirm('Are you sure you want to clear this document?')) {
+        // Preserve seal type, only reset stamp
         this.stamp = false
-        this.seal = 'color'
-        this.$router.push('/document/157318435/ai83-ke-typewritten-page-procedures')
-        window.fetch('/docs/ai83-ke-procedures.md')
-          .then((response) => response.text())
-          .then((content) => {
-            this.content = content
-            this.recno = '157318435'
-          })
+        this.$router.push('/new')
+        this.content = ''
+        this.recno = this.makeRecno() // Assign a new recno
         if (localStorageAvailable()) {
-          localStorage.setItem(FBC_RECORD_SEAL, this.seal)
           localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
         }
       }
@@ -207,6 +202,14 @@ export default {
   },
   mounted() {
     let fileIndex
+
+    // If this is the new route, do a clear page.
+    if (this.$route.path === '/new') {
+      this.content = ''
+      return
+    }
+
+    // If an ID is provided, look it up. If not found, push 404 page
     if (this.id && typeof this.id === 'string') {
       fileIndex = docs.findIndex(d => d.recno === this.id)
       if (fileIndex === -1) {
@@ -220,8 +223,10 @@ export default {
         })
       }
     } else {
+      // If no ID is provided (raw URL), show a random doc
       fileIndex = Math.floor(Math.random() * docs.length)
     }
+    // If ID is provided and doc is found, display it + route to proper URL
     if (fileIndex && fileIndex !== -1) {
       const doc = docs[fileIndex]
       window.fetch(`/docs/${doc.filename}`)
