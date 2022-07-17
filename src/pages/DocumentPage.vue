@@ -37,19 +37,20 @@
 import { jsPDF } from 'jspdf'
 import slugify from 'slugify'
 import { closable } from '../click-outside.directive.js'
-import { localStorageAvailable } from '../localstorage.js'
+import {
+  localStorageAvailable,
+  FBC_RECORD_SEAL,
+  FBC_RECORD_STAMP,
+  FBC_RECORD_CONTENT,
+  FBC_RECORD_NUMBER
+} from '../localstorage'
 import PageContainer from '../components/PageContainer.vue'
 import ContentEditor from '../components/ContentEditor.vue'
 import LoadMenu from '../components/LoadMenu.vue'
 import PageTemplate from './PageTemplate.vue'
 import docs from '../docs.json'
-import M from 'minimatch'
 
 const LETTER_WIDTH_72DPI = 612 // pixels
-
-// Localstorage keys
-const FBC_RECORD_SEAL = 'FBC_RECORD_SEAL'
-const FBC_RECORD_STAMP = 'FBC_RECORD_STAMP'
 
 function calculateHTMLScale (el) {
   const srcwidth = el.scrollWidth
@@ -131,6 +132,8 @@ export default {
         this.recno = this.makeRecno() // Assign a new recno
         if (localStorageAvailable()) {
           localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
+          localStorage.setItem(FBC_RECORD_CONTENT, this.content)
+          localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
         }
       }
     },
@@ -209,6 +212,15 @@ export default {
       return
     }
 
+    // For edit, try getting what's in storage
+    if (this.$route.path === '/edit') {
+      if (localStorageAvailable()) {
+        this.content = localStorage.getItem(FBC_RECORD_CONTENT) || ''
+        this.recno = localStorage.getItem(FBC_RECORD_NUMBER) || this.makeRecno()
+      }
+      return
+    }
+
     // If an ID is provided, look it up. If not found, push 404 page
     if (this.id && typeof this.id === 'string') {
       fileIndex = docs.findIndex(d => d.recno === this.id)
@@ -223,8 +235,20 @@ export default {
         })
       }
     } else {
-      // If no ID is provided (raw URL), show a random doc
-      fileIndex = Math.floor(Math.random() * docs.length)
+      // If no ID is provided (raw URL), check if localstorage has saved content.
+      // Display saved content if present; otherwise show a random doc
+      let maybeContent
+      if (localStorageAvailable()) {
+        maybeContent = localStorage.getItem(FBC_RECORD_CONTENT)
+        if (maybeContent) {
+          this.content = maybeContent
+          this.recno = localStorage.getItem(FBC_RECORD_NUMBER)
+        }
+      }
+
+      if (!maybeContent) {
+        fileIndex = Math.floor(Math.random() * docs.length)
+      }
     }
     // If ID is provided and doc is found, display it + route to proper URL
     if (fileIndex && fileIndex !== -1) {

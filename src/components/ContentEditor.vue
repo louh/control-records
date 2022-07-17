@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { localStorageAvailable, FBC_RECORD_CONTENT, FBC_RECORD_NUMBER } from '../localstorage'
+
 export default {
   props: {
     isActive: {
@@ -71,6 +73,13 @@ export default {
         this.$emit('update:content', this.editedContent)
         this.$emit('update:recno', this.editedRecno)
         this.$emit('update:isEditorActive', false)
+        this.$router.push('/edit')
+
+        // Save edit
+        if (localStorageAvailable()) {
+          localStorage.setItem(FBC_RECORD_CONTENT, this.editedContent)
+          localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
+        }
       }
     },
     handleRecnoChange: function () {

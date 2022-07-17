@@ -38,6 +38,7 @@ const router = createRouter({
   routes: [
     { path: '/', component: DocumentPage },
     { path: '/new', component: DocumentPage },
+    { path: '/edit', component: DocumentPage },
     { path: '/document/:id', component: DocumentPage, props: true },
     { path: '/document/:id/:slug', component: DocumentPage, props: true },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundPage }
