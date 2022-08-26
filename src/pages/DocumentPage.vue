@@ -19,7 +19,7 @@
         <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
         <button @click="handleToggleStamp">Toggle copy stamp: {{ stampButtonLabel }}</button>
       </div>
-      <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content"></PageContainer>
+      <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content" :classification="classification"></PageContainer>
     </template>
   </PageTemplate>
   <ContentEditor
@@ -30,6 +30,8 @@
     v-on:update:content="content = $event"
     :recno="recno"
     v-on:update:recno="recno = $event"
+    :classification="classification"
+    v-on:update:classification="classification = $event"
   ></ContentEditor>
 </template>
 
@@ -42,7 +44,8 @@ import {
   FBC_RECORD_SEAL,
   FBC_RECORD_STAMP,
   FBC_RECORD_CONTENT,
-  FBC_RECORD_NUMBER
+  FBC_RECORD_NUMBER,
+  FBC_CLASSIFICATION
 } from '../localstorage'
 import PageContainer from '../components/PageContainer.vue'
 import ContentEditor from '../components/ContentEditor.vue'
@@ -70,6 +73,7 @@ export default {
     return {
       docs: docs,
       recno: this.id || this.makeRecno(),
+      classification: this.classification || 'Confidential',
       seal: this.getInitialSealValue(),
       stamp: this.getInitialStampValue(),
       content: '',
@@ -134,6 +138,7 @@ export default {
           localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
           localStorage.setItem(FBC_RECORD_CONTENT, this.content)
           localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
+          localStorage.setItem(FBC_CLASSIFICATION, this.classification)
         }
       }
     },
@@ -187,6 +192,7 @@ export default {
         .then((content) => {
           this.content = content
           this.recno = opt.recno
+          this.classification = opt.classification
         })
     },
     closeMenu: function () {
@@ -209,6 +215,7 @@ export default {
     // If this is the new route, do a clear page.
     if (this.$route.path === '/new') {
       this.content = ''
+      this.confidential = 'Confidential'
       return
     }
 
@@ -217,6 +224,7 @@ export default {
       if (localStorageAvailable()) {
         this.content = localStorage.getItem(FBC_RECORD_CONTENT) || ''
         this.recno = localStorage.getItem(FBC_RECORD_NUMBER) || this.makeRecno()
+        this.classification = localStorage.getItem(FBC_CLASSIFICATION) || 'Confidential'
       }
       return
     }
@@ -243,6 +251,7 @@ export default {
         if (maybeContent) {
           this.content = maybeContent
           this.recno = localStorage.getItem(FBC_RECORD_NUMBER)
+          this.classification = localStorage.getItem(FBC_CLASSIFICATION)
         }
       }
 
@@ -259,6 +268,7 @@ export default {
         .then((content) => {
           this.content = content
           this.recno = doc.recno
+          this.classification = doc.classification
         })
     }
   },

@@ -11,7 +11,7 @@
       </div>
       <footer>
         <div>
-          Confidential
+          {{ classification }}
         </div>
         <div>
           Federal Bureau of Control, New York City, New York
@@ -45,6 +45,7 @@ export default {
       default: '',
       type: String
     },
+    classification: String,
   },
   components: {
     HeaderBox,
