@@ -96,8 +96,8 @@ export default {
         // Save edit
         if (localStorageAvailable()) {
           localStorage.setItem(FBC_RECORD_CONTENT, this.editedContent)
-          localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
-          localStorage.setItem(FBC_CLASSIFICATION, this.classification)
+          localStorage.setItem(FBC_RECORD_NUMBER, this.editedRecno)
+          localStorage.setItem(FBC_CLASSIFICATION, this.editedClassification)
         }
       }
     },
@@ -150,7 +150,7 @@ export default {
   width: 100%;
   margin: 20px;
   max-width: 800px;
-  max-height: 860px;
+  max-height: 875px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1em 2em;
@@ -223,6 +223,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1em;
 }
 
 .classification-input label {
