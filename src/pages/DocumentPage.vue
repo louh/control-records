@@ -185,15 +185,17 @@ export default {
       }
     },
     loadSelected: function (opt) {
-      this.isLoadMenuOpen = false
-      this.$router.push(`/document/${opt.recno}/${this.makeSlug(opt)}`)
-      window.fetch(`/docs/${opt.filename}`)
-        .then((response) => response.text())
-        .then((content) => {
-          this.content = content
-          this.recno = opt.recno
-          this.classification = opt.classification
-        })
+      if (window.confirm('Are you sure you want to load this template?\nYour current document will be cleared!')) {
+        this.isLoadMenuOpen = false
+        this.$router.push(`/document/${opt.recno}/${this.makeSlug(opt)}`)
+        window.fetch(`/docs/${opt.filename}`)
+          .then((response) => response.text())
+          .then((content) => {
+            this.content = content
+            this.recno = opt.recno
+            this.classification = opt.classification
+          })
+      }
     },
     closeMenu: function () {
       this.isLoadMenuOpen = false
