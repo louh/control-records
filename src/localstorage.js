@@ -34,5 +34,6 @@ export function localStorageAvailable () {
 // LocalStorage keys
 export const FBC_RECORD_CONTENT = 'FBC_RECORD_CONTENT'
 export const FBC_RECORD_NUMBER = 'FBC_RECORD_NUMBER'
+export const FBC_CLASSIFICATION = 'FBC_CLASSIFICATION'
 export const FBC_RECORD_SEAL = 'FBC_RECORD_SEAL'
 export const FBC_RECORD_STAMP = 'FBC_RECORD_STAMP'

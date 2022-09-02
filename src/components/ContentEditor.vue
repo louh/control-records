@@ -20,6 +20,13 @@
         </div>
         <button @click="handleGenerateRecno">Generate a new record number</button>
       </div>
+      <div class="classification-input">
+        <label>Classification:</label>
+        <div class="classification-input-control">
+          <input v-model="editedClassification" maxlength="15" @input="handleClassificationChange" />
+        </div>
+        <button @click="handleResetDefaultClassification">Reset to default (Confidential)</button>
+      </div>
       <div class="errors">
         <p v-for="error in errors" :key="error">Error: {{error}}</p>
       </div>
@@ -32,7 +39,7 @@
 </template>
 
 <script>
-import { localStorageAvailable, FBC_RECORD_CONTENT, FBC_RECORD_NUMBER } from '../localstorage'
+import { localStorageAvailable, FBC_RECORD_CONTENT, FBC_RECORD_NUMBER, FBC_CLASSIFICATION } from '../localstorage'
 
 export default {
   props: {
@@ -48,11 +55,16 @@ export default {
       default: '',
       type: String,
     },
+    classification: {
+      default: '',
+      type: String,
+    },
   },
   data() {
     return {
       editedContent: this.content,
       editedRecno: this.recno,
+      editedClassification: this.classification,
       errors: [],
     }
   },
@@ -61,6 +73,8 @@ export default {
       this.$emit('update:isEditorActive', false)
       // Reset edited recno
       this.editedRecno = this.recno
+      // Reset edited classification
+      this.editedClassification = this.classification
       this.errors = []
     },
     handleConfirm: function () {
@@ -68,17 +82,22 @@ export default {
       if (this.editedRecno.length !== 9 || !this.editedRecno.match(/[0-9]{9}/)) {
         this.errors.push('Record number must be a nine-digit number')
       }
+      if (this.editedClassification.length > 15) {
+        this.errors.push('Classification must not be longer than 15 characters')
+      }
 
       if (this.errors.length === 0) {
         this.$emit('update:content', this.editedContent)
         this.$emit('update:recno', this.editedRecno)
+        this.$emit('update:classification', this.editedClassification)
         this.$emit('update:isEditorActive', false)
         this.$router.push('/edit')
 
         // Save edit
         if (localStorageAvailable()) {
           localStorage.setItem(FBC_RECORD_CONTENT, this.editedContent)
-          localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
+          localStorage.setItem(FBC_RECORD_NUMBER, this.editedRecno)
+          localStorage.setItem(FBC_CLASSIFICATION, this.editedClassification)
         }
       }
     },
@@ -91,6 +110,13 @@ export default {
     },
     generateRecno: function () {
       return Math.floor(Math.random() * 1000000000).toString().padStart(9, '0')
+    },
+    handleClassificationChange: function () {
+      this.errors = []
+    },
+    handleResetDefaultClassification: function () {
+      this.editedClassification = 'Confidential'
+      this.errors = []
     },
   }
 }
@@ -124,7 +150,7 @@ export default {
   width: 100%;
   margin: 20px;
   max-width: 800px;
-  max-height: 800px;
+  max-height: 875px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1em 2em;
@@ -171,7 +197,7 @@ export default {
   margin-right: 0.75em;
   border: 1px solid darkgray;
   border-radius: 3px;
-  padding: 0.25em 0.25em 0.25em 0.5em;
+  padding: 0.25em 0.85em 0.25em 0.5em;
   color: #888;
   font-family: 'OCR F OT', sans-serif;
 }
@@ -189,6 +215,47 @@ export default {
 }
 
 .record-input button {
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.classification-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.classification-input label {
+  font-weight: bold;
+}
+
+.classification-input-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1.65em;
+  margin-right: 0.75em;
+  border: 1px solid darkgray;
+  border-radius: 3px;
+  padding: 0.25em 0.5em 0.25em 0.25em;
+  color: #888;
+  font-family: 'OCR F OT', sans-serif;
+}
+
+.classification-input-control input {
+  appearance: none;
+  border: 0;
+  width: 160px;
+  height: 100%;
+  margin-left: 0.2em;
+  padding: 0.25em 0.5em 0.25em 0.1em;
+  color: #333;
+  font-family: 'OCR F OT', sans-serif;
+  font-size: inherit;
+}
+
+.classification-input button {
   flex-grow: 1;
   margin-bottom: 0;
 }
