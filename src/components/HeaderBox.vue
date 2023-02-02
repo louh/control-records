@@ -37,7 +37,7 @@ export default {
   border-right: var(--header-box-border);
   /* Non-standard preservation of background colors for redaction,
   should work in most newer browsers, but not in IE */
-  --webkit-print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
   color-adjust: exact;
 }
 
