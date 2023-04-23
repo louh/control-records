@@ -56,7 +56,7 @@ export default {
   color: transparent;
   /* Non-standard preservation of background colors for redaction,
     should work in most newer browsers, but not in IE */
-  --webkit-print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
   color-adjust: exact;
   user-select: none;
   /* Match black highlighter experience with game */
