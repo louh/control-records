@@ -33,7 +33,7 @@ export default {
   .stamp {
     position: absolute;
     width: 22%;
-    opacity: 0.75;
+    opacity: 1;
     left: 25%;
     top: 9%;
     transform: rotate(-11deg);
