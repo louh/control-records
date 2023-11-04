@@ -150,7 +150,7 @@ export default {
   width: 100%;
   margin: 20px;
   max-width: 800px;
-  max-height: 875px;
+  max-height: 90vh;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1em 2em;
