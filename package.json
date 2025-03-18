@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.16",
-    "codemirror": "^5.65.14",
+    "codemirror": "^5.65.18",
     "dompurify": "^3.0.5",
     "jspdf": "^2.5.1",
     "marked": "^4.3.0",
