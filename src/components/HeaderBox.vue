@@ -17,7 +17,10 @@
 <script>
 export default {
   props: {
-    recno: String
+    recno: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>

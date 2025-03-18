@@ -90,6 +90,12 @@ export default {
       type: String,
     },
   },
+  emits: [
+    'update:isEditorActive',
+    'update:content',
+    'update:recno',
+    'update:classification',
+  ],
   data() {
     return {
       editedContent: this.content,

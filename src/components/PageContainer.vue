@@ -50,20 +50,26 @@ export default {
     CopyStamp,
   },
   props: {
-    recno: String,
+    recno: {
+      type: String,
+      required: true
+    },
     seal: {
+      type: String,
       default: 'color',
-      type: String
     },
     stamp: {
+      type: Boolean,
       default: false,
-      type: Boolean
     },
     content: {
+      type: String,
       default: '',
-      type: String
     },
-    classification: String,
+    classification: {
+      type: String,
+      default: ''
+    }
   },
 }
 </script>

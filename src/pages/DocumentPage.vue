@@ -92,7 +92,17 @@ export default {
   directives: {
     closable
   },
-  props: ['id', 'slug'],
+  props: {
+    id: {
+      type: String,
+      default: undefined
+    },
+    // This is passed to this component, but not used
+    slug: {
+      type: String,
+      default: undefined
+    }
+  },
   data() {
     return {
       docs: docs,

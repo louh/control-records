@@ -1,8 +1,11 @@
 <template>
+  <!-- eslint-disable vue/no-v-html -->
+  <!-- We are sanitizing input with marked/DOMPurify -->
   <div
     class="content"
     v-html="parsedMarkdown"
   />
+  <!-- eslint-enable -->
 </template>
 
 <script>

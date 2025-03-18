@@ -31,6 +31,7 @@ export default {
       type: Array
     },
   },
+  emits: ['change'],
   computed: {
     sortedItems: function () {
       return this.items.slice().sort(compare)
