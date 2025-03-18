@@ -1,13 +1,26 @@
 <template>
-  <div class="paper" id="page">
+  <div
+    id="page"
+    class="paper"
+  >
     <div class="contents">
       <header>
-        <HeaderBox :recno="recno"></HeaderBox>
-        <img v-if="seal === 'color'" src="../assets/fbc-seal-color.png" alt="" draggable="false" />
-        <img v-if="seal === 'bw'" src="../assets/fbc-seal-bw.svg" alt="" draggable="false" />
+        <HeaderBox :recno="recno" />
+        <img
+          v-if="seal === 'color'"
+          src="../assets/fbc-seal-color.png"
+          alt=""
+          draggable="false"
+        >
+        <img
+          v-if="seal === 'bw'"
+          src="../assets/fbc-seal-bw.svg"
+          alt=""
+          draggable="false"
+        >
       </header>
       <div class="body">
-        <PageBodyContent :content="content"></PageBodyContent>
+        <PageBodyContent :content="content" />
       </div>
       <footer>
         <div>
@@ -31,6 +44,11 @@ import PageBodyContent from './PageBodyContent.vue'
 import CopyStamp from './CopyStamp.vue'
 
 export default {
+  components: {
+    HeaderBox,
+    PageBodyContent,
+    CopyStamp,
+  },
   props: {
     recno: String,
     seal: {
@@ -46,11 +64,6 @@ export default {
       type: String
     },
     classification: String,
-  },
-  components: {
-    HeaderBox,
-    PageBodyContent,
-    CopyStamp,
   },
 }
 </script>

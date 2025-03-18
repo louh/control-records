@@ -1,7 +1,11 @@
 <template>
   <div class="box">
     <div class="image">
-      <img src="../assets/control.svg" alt="" draggable="false" />
+      <img
+        src="../assets/control.svg"
+        alt=""
+        draggable="false"
+      >
     </div>
     <div class="text">
       <span>FBC DOCUMENTREC</span>

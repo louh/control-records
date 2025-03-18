@@ -2,7 +2,12 @@
   <PageTemplate>
     <template #default>
       <div class="controls">
-        <button @click="handleLoad" ref="loadButton">Load</button>
+        <button
+          ref="loadButton"
+          @click="handleLoad"
+        >
+          Load
+        </button>
         <LoadMenu
           v-if="isLoadMenuOpen"
           v-closable="{
@@ -12,27 +17,43 @@
           :items="docs"
           @change="loadSelected"
         />
-        <button @click="handleEdit">Edit</button>
-        <button @click="handleNew">New</button>
-        <button @click="handlePrint">Print</button>
+        <button @click="handleEdit">
+          Edit
+        </button>
+        <button @click="handleNew">
+          New
+        </button>
+        <button @click="handlePrint">
+          Print
+        </button>
         <!-- button @click="handleExportPDF">Export PDF (beta)</button -->
-        <button @click="handleToggleSeal">Toggle seal: {{ sealButtonLabel }}</button>
-        <button @click="handleToggleStamp">Toggle copy stamp: {{ stampButtonLabel }}</button>
+        <button @click="handleToggleSeal">
+          Toggle seal: {{ sealButtonLabel }}
+        </button>
+        <button @click="handleToggleStamp">
+          Toggle copy stamp: {{ stampButtonLabel }}
+        </button>
       </div>
-      <PageContainer :recno="recno" :seal="seal" :stamp="stamp" :content="content" :classification="classification"></PageContainer>
+      <PageContainer
+        :recno="recno"
+        :seal="seal"
+        :stamp="stamp"
+        :content="content"
+        :classification="classification"
+      />
     </template>
   </PageTemplate>
   <ContentEditor
     :key="content"
-    :isActive="isEditorActive"
-    v-on:update:isEditorActive="isEditorActive = $event"
+    :is-active="isEditorActive"
     :content="content"
-    v-on:update:content="content = $event"
     :recno="recno"
-    v-on:update:recno="recno = $event"
     :classification="classification"
-    v-on:update:classification="classification = $event"
-  ></ContentEditor>
+    @update:is-editor-active="isEditorActive = $event"
+    @update:content="content = $event"
+    @update:recno="recno = $event"
+    @update:classification="classification = $event"
+  />
 </template>
 
 <script>
@@ -68,6 +89,9 @@ export default {
     ContentEditor,
     LoadMenu,
   },
+  directives: {
+    closable
+  },
   props: ['id', 'slug'],
   data() {
     return {
@@ -96,6 +120,69 @@ export default {
     stampButtonLabel () {
       return this.stamp ? 'On' : 'Off'
     },
+  },
+  mounted() {
+    let fileIndex
+
+    // If this is the new route, do a clear page.
+    if (this.$route.path === '/new') {
+      this.content = ''
+      this.confidential = 'Confidential'
+      return
+    }
+
+    // For edit, try getting what's in storage
+    if (this.$route.path === '/edit') {
+      if (localStorageAvailable()) {
+        this.content = localStorage.getItem(FBC_RECORD_CONTENT) || ''
+        this.recno = localStorage.getItem(FBC_RECORD_NUMBER) || this.makeRecno()
+        this.classification = localStorage.getItem(FBC_CLASSIFICATION) || 'Confidential'
+      }
+      return
+    }
+
+    // If an ID is provided, look it up. If not found, push 404 page
+    if (this.id && typeof this.id === 'string') {
+      fileIndex = docs.findIndex(d => d.recno === this.id)
+      if (fileIndex === -1) {
+        this.$router.push({
+          name: 'NotFound',
+          // preserve current path and remove the first char to avoid the target URL starting with `//`
+          params: { pathMatch: this.$route.path.substring(1).split('/') },
+          // preserve existing query and hash if any
+          query: this.$route.query,
+          hash: this.$route.hash,
+        })
+      }
+    } else {
+      // If no ID is provided (raw URL), check if localstorage has saved content.
+      // Display saved content if present; otherwise show a random doc
+      let maybeContent
+      if (localStorageAvailable()) {
+        maybeContent = localStorage.getItem(FBC_RECORD_CONTENT)
+        if (maybeContent) {
+          this.content = maybeContent
+          this.recno = localStorage.getItem(FBC_RECORD_NUMBER)
+          this.classification = localStorage.getItem(FBC_CLASSIFICATION)
+        }
+      }
+
+      if (!maybeContent) {
+        fileIndex = Math.floor(Math.random() * docs.length)
+      }
+    }
+    // If ID is provided and doc is found, display it + route to proper URL
+    if (fileIndex && fileIndex !== -1) {
+      const doc = docs[fileIndex]
+      this.$router.push(`/document/${doc.recno}/${this.makeSlug(doc)}`)
+      window.fetch(`/docs/${doc.filename}`)
+        .then((response) => response.text())
+        .then((content) => {
+          this.content = content
+          this.recno = doc.recno
+          this.classification = doc.classification
+        })
+    }
   },
   methods: {
     getInitialSealValue: function () {
@@ -210,72 +297,6 @@ export default {
         strict: true,
       })
     },
-  },
-  mounted() {
-    let fileIndex
-
-    // If this is the new route, do a clear page.
-    if (this.$route.path === '/new') {
-      this.content = ''
-      this.confidential = 'Confidential'
-      return
-    }
-
-    // For edit, try getting what's in storage
-    if (this.$route.path === '/edit') {
-      if (localStorageAvailable()) {
-        this.content = localStorage.getItem(FBC_RECORD_CONTENT) || ''
-        this.recno = localStorage.getItem(FBC_RECORD_NUMBER) || this.makeRecno()
-        this.classification = localStorage.getItem(FBC_CLASSIFICATION) || 'Confidential'
-      }
-      return
-    }
-
-    // If an ID is provided, look it up. If not found, push 404 page
-    if (this.id && typeof this.id === 'string') {
-      fileIndex = docs.findIndex(d => d.recno === this.id)
-      if (fileIndex === -1) {
-        this.$router.push({
-          name: 'NotFound',
-          // preserve current path and remove the first char to avoid the target URL starting with `//`
-          params: { pathMatch: this.$route.path.substring(1).split('/') },
-          // preserve existing query and hash if any
-          query: this.$route.query,
-          hash: this.$route.hash,
-        })
-      }
-    } else {
-      // If no ID is provided (raw URL), check if localstorage has saved content.
-      // Display saved content if present; otherwise show a random doc
-      let maybeContent
-      if (localStorageAvailable()) {
-        maybeContent = localStorage.getItem(FBC_RECORD_CONTENT)
-        if (maybeContent) {
-          this.content = maybeContent
-          this.recno = localStorage.getItem(FBC_RECORD_NUMBER)
-          this.classification = localStorage.getItem(FBC_CLASSIFICATION)
-        }
-      }
-
-      if (!maybeContent) {
-        fileIndex = Math.floor(Math.random() * docs.length)
-      }
-    }
-    // If ID is provided and doc is found, display it + route to proper URL
-    if (fileIndex && fileIndex !== -1) {
-      const doc = docs[fileIndex]
-      this.$router.push(`/document/${doc.recno}/${this.makeSlug(doc)}`)
-      window.fetch(`/docs/${doc.filename}`)
-        .then((response) => response.text())
-        .then((content) => {
-          this.content = content
-          this.recno = doc.recno
-          this.classification = doc.classification
-        })
-    }
-  },
-  directives: {
-    closable
   }
 }
 </script>

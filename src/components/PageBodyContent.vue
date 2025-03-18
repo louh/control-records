@@ -1,5 +1,8 @@
 <template>
-  <div class="content" v-html="parsedMarkdown"></div>
+  <div
+    class="content"
+    v-html="parsedMarkdown"
+  />
 </template>
 
 <script>

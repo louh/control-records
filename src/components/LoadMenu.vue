@@ -4,8 +4,8 @@
       <li
         v-for="item in sortedItems"
         :key="item.label + '|' + item.code"
-        @click="handleSelect(item)"
         tabindex="0"
+        @click="handleSelect(item)"
       >
         {{ item.label }} <span>({{ item.code }})</span>
       </li>

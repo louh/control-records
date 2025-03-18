@@ -9,7 +9,9 @@
           System Error Code: 404
         </p>
         <p>
-          <router-link to="/">Return home.</router-link>
+          <router-link to="/">
+            Return home.
+          </router-link>
         </p>
       </div>
     </template>
