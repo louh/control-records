@@ -157,6 +157,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overscroll-behavior: contain;
 }
 
 .dialog p {
