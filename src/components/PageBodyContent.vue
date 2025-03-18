@@ -1,9 +1,16 @@
 <template>
-  <div class="content" v-html="parsedMarkdown"></div>
+  <!-- eslint-disable vue/no-v-html -->
+  <!-- We are sanitizing input with marked/DOMPurify -->
+  <div
+    class="content"
+    v-html="parsedMarkdown"
+  />
+  <!-- eslint-enable -->
 </template>
 
 <script>
 import { marked } from 'marked'
+import { markedSmartypants } from 'marked-smartypants'
 import DOMPurify from 'dompurify'
 
 export default {
@@ -15,10 +22,9 @@ export default {
   },
   computed: {
     parsedMarkdown: function () {
+      marked.use(markedSmartypants())
       marked.setOptions({
-        breaks: true,
-        headerIds: false,
-        smartypants: true,
+        breaks: true
       })
 
       // DOMPurify prevents people from typing in custom HTML etc

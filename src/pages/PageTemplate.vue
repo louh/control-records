@@ -1,7 +1,7 @@
 <template>
   <main class="container">
     <HeaderBlock />
-    <slot></slot>
+    <slot />
     <FooterBlock />
   </main>
 </template>

@@ -5,7 +5,7 @@
     :style="style"
     alt="Record copy stamp"
     draggable="false"
-  />
+  >
 </template>
 
 <script>

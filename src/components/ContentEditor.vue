@@ -1,8 +1,17 @@
 <template>
-  <div class="editor" :class="{ visible: isActive }">
+  <div
+    class="editor"
+    :class="{ visible: isActive }"
+  >
     <div class="dialog">
       <h2>Content editor</h2>
-      <p>Use <a href="https://www.markdownguide.org/basic-syntax" target="_blank" rel="noopener noreferer">Markdown syntax</a> to write text. Note: use "italic" for underline, and "strikethrough" for redacted text.</p>
+      <p>
+        Use <a
+          href="https://www.markdownguide.org/basic-syntax"
+          target="_blank"
+          rel="noopener noreferer"
+        >Markdown syntax</a> to write text. Note: use "italic" for underline, and "strikethrough" for redacted text.
+      </p>
       <div class="body">
         <v-md-editor
           v-model="editedContent"
@@ -16,23 +25,44 @@
         <label>Record number:</label>
         <div class="record-input-control">
           <span>NAR</span>
-          <input v-model="editedRecno" maxlength="9" @input="handleRecnoChange" />
+          <input
+            v-model="editedRecno"
+            maxlength="9"
+            @input="handleRecnoChange"
+          >
         </div>
-        <button @click="handleGenerateRecno">Generate a new record number</button>
+        <button @click="handleGenerateRecno">
+          Generate a new record number
+        </button>
       </div>
       <div class="classification-input">
         <label>Classification:</label>
         <div class="classification-input-control">
-          <input v-model="editedClassification" maxlength="15" @input="handleClassificationChange" />
+          <input
+            v-model="editedClassification"
+            maxlength="15"
+            @input="handleClassificationChange"
+          >
         </div>
-        <button @click="handleResetDefaultClassification">Reset to default (Confidential)</button>
+        <button @click="handleResetDefaultClassification">
+          Reset to default (Confidential)
+        </button>
       </div>
       <div class="errors">
-        <p v-for="error in errors" :key="error">Error: {{error}}</p>
+        <p
+          v-for="error in errors"
+          :key="error"
+        >
+          Error: {{ error }}
+        </p>
       </div>
       <div class="controls">
-        <button @click="handleCancel">Cancel</button>
-        <button @click="handleConfirm">Confirm</button>
+        <button @click="handleCancel">
+          Cancel
+        </button>
+        <button @click="handleConfirm">
+          Confirm
+        </button>
       </div>
     </div>
   </div>
@@ -60,6 +90,12 @@ export default {
       type: String,
     },
   },
+  emits: [
+    'update:isEditorActive',
+    'update:content',
+    'update:recno',
+    'update:classification',
+  ],
   data() {
     return {
       editedContent: this.content,

@@ -1,13 +1,26 @@
 <template>
-  <div class="paper" id="page">
+  <div
+    id="page"
+    class="paper"
+  >
     <div class="contents">
       <header>
-        <HeaderBox :recno="recno"></HeaderBox>
-        <img v-if="seal === 'color'" src="../assets/fbc-seal-color.png" alt="" draggable="false" />
-        <img v-if="seal === 'bw'" src="../assets/fbc-seal-bw.svg" alt="" draggable="false" />
+        <HeaderBox :recno="recno" />
+        <img
+          v-if="seal === 'color'"
+          src="../assets/fbc-seal-color.png"
+          alt=""
+          draggable="false"
+        >
+        <img
+          v-if="seal === 'bw'"
+          src="../assets/fbc-seal-bw.svg"
+          alt=""
+          draggable="false"
+        >
       </header>
       <div class="body">
-        <PageBodyContent :content="content"></PageBodyContent>
+        <PageBodyContent :content="content" />
       </div>
       <footer>
         <div>
@@ -31,26 +44,32 @@ import PageBodyContent from './PageBodyContent.vue'
 import CopyStamp from './CopyStamp.vue'
 
 export default {
-  props: {
-    recno: String,
-    seal: {
-      default: 'color',
-      type: String
-    },
-    stamp: {
-      default: false,
-      type: Boolean
-    },
-    content: {
-      default: '',
-      type: String
-    },
-    classification: String,
-  },
   components: {
     HeaderBox,
     PageBodyContent,
     CopyStamp,
+  },
+  props: {
+    recno: {
+      type: String,
+      required: true
+    },
+    seal: {
+      type: String,
+      default: 'color',
+    },
+    stamp: {
+      type: Boolean,
+      default: false,
+    },
+    content: {
+      type: String,
+      default: '',
+    },
+    classification: {
+      type: String,
+      default: ''
+    }
   },
 }
 </script>
