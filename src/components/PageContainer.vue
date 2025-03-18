@@ -2,6 +2,7 @@
   <div
     id="page"
     class="paper"
+    :class="{ 'paper-a4': paperSize === 'a4' }"
   >
     <div class="contents">
       <header>
@@ -62,6 +63,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    paperSize: {
+      type: String,
+      default: 'letter',
+    },
     content: {
       type: String,
       default: '',
@@ -83,6 +88,10 @@ export default {
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     position: relative;
+  }
+
+  .paper-a4 {
+    padding-bottom: calc(297 / 210 * 100%);
   }
 
   @media only print {
@@ -147,7 +156,7 @@ export default {
 
   header img {
     position: absolute;
-    top: 5%; /* Percentage is based on height in this case, so we can use a fixed amount */
+    top: calc(var(--top-bottom-margin) - 1em);
     right: var(--side-margin);
     width: calc(9.75 / 6 * 72 / 612 * 100%);
     height: auto;

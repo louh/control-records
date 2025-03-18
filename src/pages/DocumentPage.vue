@@ -33,11 +33,15 @@
         <button @click="handleToggleStamp">
           Toggle copy stamp: {{ stampButtonLabel }}
         </button>
+        <button @click="handleTogglePaperSize">
+          Paper size: {{ paperSizeLabel }}
+        </button>
       </div>
       <PageContainer
         :recno="recno"
         :seal="seal"
         :stamp="stamp"
+        :paperSize="paperSize"
         :content="content"
         :classification="classification"
       />
@@ -66,6 +70,7 @@ import {
   FBC_RECORD_STAMP,
   FBC_RECORD_CONTENT,
   FBC_RECORD_NUMBER,
+  FBC_RECORD_PAPER_SIZE,
   FBC_CLASSIFICATION
 } from '../localstorage'
 import PageContainer from '../components/PageContainer.vue'
@@ -110,6 +115,7 @@ export default {
       classification: this.classification || 'Confidential',
       seal: this.getInitialSealValue(),
       stamp: this.getInitialStampValue(),
+      paperSize: this.getInitialPaperSizeValue(),
       content: '',
       isEditorActive: false,
       isLoadMenuOpen: false,
@@ -130,6 +136,15 @@ export default {
     stampButtonLabel () {
       return this.stamp ? 'On' : 'Off'
     },
+    paperSizeLabel () {
+      switch(this.paperSize) {
+        case 'a4':
+          return 'A4'
+        case 'letter':
+        default:
+          return 'Letter'
+      }
+    }
   },
   mounted() {
     let fileIndex
@@ -217,6 +232,18 @@ export default {
         return Math.random() < 0.5 
       }
     },
+    getInitialPaperSizeValue: function () {
+      if (localStorageAvailable()) {
+        // Value is null if it doesn't exist
+        // in that case, return 'letter'
+        const val = localStorage.getItem(FBC_RECORD_PAPER_SIZE)
+        if (val !== null) return val
+        else return 'letter'
+      } else {
+        // No localstorage, return default value
+        return 'letter'
+      }
+    },
     handleLoad: function () {
       this.isLoadMenuOpen = !this.isLoadMenuOpen
     },
@@ -235,6 +262,7 @@ export default {
           localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
           localStorage.setItem(FBC_RECORD_CONTENT, this.content)
           localStorage.setItem(FBC_RECORD_NUMBER, this.recno)
+          localStorage.setItem(FBC_RECORD_PAPER_SIZE, this.paperSize)
           localStorage.setItem(FBC_CLASSIFICATION, this.classification)
         }
       }
@@ -279,6 +307,22 @@ export default {
       this.stamp = !this.stamp
       if (localStorageAvailable()) {
         localStorage.setItem(FBC_RECORD_STAMP, this.stamp)
+      }
+    },
+    handleTogglePaperSize: function () {
+      switch (this.paperSize) {
+        case 'letter':
+          this.paperSize = 'a4'
+          break
+        case 'a4':
+          this.paperSize = 'letter'
+          break
+        default:
+          this.paperSize = 'a4'
+          break
+      }
+      if (localStorageAvailable()) {
+        localStorage.setItem(FBC_RECORD_PAPER_SIZE, this.paperSize)
       }
     },
     loadSelected: function (opt) {
