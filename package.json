@@ -15,7 +15,7 @@
     "codemirror": "^5.65.20",
     "dompurify": "^3.2.6",
     "jspdf": "^3.0.2",
-    "marked": "^15.0.12",
+    "marked": "^16.2.1",
     "marked-smartypants": "^1.1.10",
     "path-browserify": "^1.0.1",
     "slugify": "^1.6.6",
