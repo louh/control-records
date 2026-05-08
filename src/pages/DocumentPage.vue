@@ -41,7 +41,7 @@
         :recno="recno"
         :seal="seal"
         :stamp="stamp"
-        :paperSize="paperSize"
+        :paper-size="paperSize"
         :content="content"
         :classification="classification"
       />
