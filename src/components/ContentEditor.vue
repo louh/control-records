@@ -18,7 +18,6 @@
           mode="edit"
           left-toolbar="h bold italic strikethrough"
           right-toolbar="undo redo clear"
-          height="500px"
         />
       </div>
       <div class="record-input">
@@ -187,8 +186,7 @@ export default {
   margin: 20px;
   max-width: 800px;
   max-height: 90vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 1em 2em;
   display: flex;
   flex-direction: column;
@@ -324,6 +322,10 @@ export default {
 .v-md-editor .codemirror-wrapper .cm-link,
 .v-md-editor .codemirror-wrapper .cm-url {
   color: #222 !important;
+}
+
+.v-md-editor__editor-wrapper {
+  max-height: 35cqh;
 }
 
 /* Style text to mimic render.
