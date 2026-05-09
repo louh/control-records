@@ -12,22 +12,22 @@
   },
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.18",
-    "codemirror": "^5.65.20",
-    "dompurify": "^3.3.1",
-    "jspdf": "^4.0.0",
-    "marked": "^17.0.1",
-    "marked-smartypants": "^1.1.11",
+    "codemirror": "^5.65.21",
+    "dompurify": "^3.4.2",
+    "jspdf": "^4.2.1",
+    "marked": "^18.0.3",
+    "marked-smartypants": "^1.1.12",
     "path-browserify": "^1.0.1",
-    "slugify": "^1.6.6",
-    "vue": "^3.5.26",
-    "vue-router": "^4.6.4"
+    "slugify": "^1.6.9",
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@vitejs/plugin-vue": "^6.0.3",
-    "eslint": "^9.39.2",
-    "eslint-plugin-vue": "^10.6.2",
-    "globals": "^17.0.0",
-    "vite": "^7.3.1"
+    "@eslint/js": "^10.0.1",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "eslint": "^10.3.0",
+    "eslint-plugin-vue": "^10.9.1",
+    "globals": "^17.6.0",
+    "vite": "^7.3.3"
   }
 }
