@@ -1,0 +1,5 @@
+allowBuilds:
+  core-js: set this to true or false
+  esbuild: set this to true or false
+minimumReleaseAgeExclude:
+  - '@vitejs/plugin-vue@6.0.11'
