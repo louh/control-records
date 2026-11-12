@@ -10,20 +10,20 @@ https://www.youtube.com/watch?v=mFmV2sX8QyM&t=181s)) Now you can make your own!
 
 ## Project setup
 ```
-npm install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run dev
+pnpm dev
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+pnpm build
 ```
 
-### Lints and fixes files
+### Lints files
 ```
-npm run lint
+pnpm lint
 ```
